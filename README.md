@@ -7,9 +7,9 @@
 3. Set the .env variables.
     - POSTGRES_USER
     - POSTGRES_PASSWORD
-    - POSTGRES_DB
-    - POSTGRES_HOST
-    - POSTGRES_PORT
+    - POSTGRES_DB=credit_db
+    - POSTGRES_HOST=db
+    - POSTGRES_PORT=5432
 
 4. docker-compose up --build
     - The data will not be injested as the migrations are yet to be made.
