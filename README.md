@@ -1,27 +1,32 @@
 # Credit-Approval-System-API
 
-1. Clone the repo.
+1. Create a virtual enviornment.
+    - python -m venv <name>
 
-2. Create a .env file in the api folder, where DockerFile is present.
+2. Clone the repo.
 
-3. Set the .env variables.
+3. Create a .env file in the api folder, where DockerFile is present.
+
+4. Set the .env variables.
     - POSTGRES_USER
     - POSTGRES_PASSWORD
     - POSTGRES_DB=credit_db
     - POSTGRES_HOST=db
     - POSTGRES_PORT=5432
 
-4. docker-compose up --build
+5. docker-compose up --build
     - The data will not be injested as the migrations are yet to be made.
 
-5. Open the docker shell and make migrations.
+6. Open the docker shell and make migrations.
     - docker exec -it api-django-1  /bin/bash
     - python manage.py makemigrations
     - python manage.py migrate
 
-6. Rerun the docker file to injest all data to db.
+7. Rerun the docker file to injest all data to db.
+    - docker-compose down
+    - docker-compose up --build
 
-7. Open postman and check following endpoints:
+8. Open postman and check following endpoints:
     - POST /register
         - {
             "first_name" : "Hetavi",
