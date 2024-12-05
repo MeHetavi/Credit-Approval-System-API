@@ -24,8 +24,8 @@
 7. Open postman and check following endpoints:
     - POST /register
         - {
-            "first_name" : 'Hetavi',
-            "last_name" : 'Shah',
+            "first_name" : "Hetavi",
+            "last_name" : "Shah",
             "age" : 19,
             "monthly_income" : 1000,
             "phone_number" : 9876543210

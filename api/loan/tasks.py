@@ -14,9 +14,9 @@ def ingest_loan_data(file_path):
     except Exception as e:
         return f"Error reading file: {str(e)}"
     
-    for index, row in loan_data.iterrows():
-        try:
-            if not Loan.objects.all():
+    if not Loan.objects.all():
+        for index, row in loan_data.iterrows():
+            try:
                 customer = Customer.objects.get(customer_id=row['Customer Id'])
                 loan = Loan(
                     customer=customer,
@@ -29,12 +29,12 @@ def ingest_loan_data(file_path):
                     end_date=datetime.strptime(str(row['End Date']), "%Y-%m-%d %H:%M:%S")
                 )
                 loan.save()
-            else:
-                return "Loan data already ingested."
 
-        except Customer.DoesNotExist:
-            print(f"Customer with ID {row['Customer Id']} does not exist")
-        except Exception as e:
-            print(f"Error processing loan ID {row['Loan Id']}: {str(e)}")
+            except Customer.DoesNotExist:
+                print(f"Customer with ID {row['Customer Id']} does not exist")
+            except Exception as e:
+                print(f"Error processing loan ID {row['Loan Id']}: {str(e)}")
+    else:
+        return "Loan data already ingested."
     
     return "Loan data ingestion complete."

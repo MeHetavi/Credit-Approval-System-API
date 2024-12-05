@@ -13,22 +13,22 @@ def ingest_customer_data(file_path='customer_data.xlsx'):
     except Exception as e:
         return f"Error reading file: {str(e)}"
     
-    for index, row in customer_data.iterrows():
-        try:
-            if not Customer.objects.all():
-                customer = Customer(
-                    first_name=row['First Name'],
-                    last_name=row['Last Name'],
-                    age=row['Age'],
-                    phone_number=row['Phone Number'],
-                    monthly_salary=row['Monthly Salary'],
-                    approved_limit=row['Approved Limit'],
-                    )
-                customer.save()
-            else:
-                return "Customer data already ingested."
+    if not Customer.objects.all():
 
-        except Exception as e:
-            break
-    
+        for index, row in customer_data.iterrows():
+            try:
+                    customer = Customer(
+                        first_name=row['First Name'],
+                        last_name=row['Last Name'],
+                        age=row['Age'],
+                        phone_number=row['Phone Number'],
+                        monthly_salary=row['Monthly Salary'],
+                        approved_limit=row['Approved Limit'],
+                        )
+                    customer.save()
+            except Exception as e:
+                break
+    else:
+        return "Customer data already ingested."
+
     return "Customer data ingestion complete."
